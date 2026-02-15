@@ -1,4 +1,4 @@
-<div class="p-8 max-w-6xl mx-auto">
+<div class="p-4 max-w-7xl mx-auto">
 
   <div class="flex items-center justify-between mb-7">
     <div>
@@ -6,8 +6,11 @@
       <p class="text-sm text-gray-500 mt-0.5">{{ loans.length }} emprunt(s) au total</p>
     </div>
     <button (click)="openBorrowModal()"
-      class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors">
-      + Nouvel emprunt
+      class="px-3 py-3 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors inline-flex items-center">
+      <svg class="size-5 mr-1" fill="CurrentColor" viewBox="0 0 28 28" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+      </svg>
+       Nouvel emprunt
     </button>
   </div>
 
@@ -29,44 +32,45 @@
     </button>
   </div>
 
-  <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-    <table class="w-full text-sm">
-      <thead>
-        <tr class="border-b border-gray-200">
-          <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Livre</th>
-          <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Utilisateur</th>
-          <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Date emprunt</th>
-          <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Date retour</th>
-          <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Statut</th>
-          <th class="px-6 py-4 text-right text-xs font-semibold text-gray-400 uppercase tracking-wider">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngIf="filteredLoans.length === 0">
-          <td colspan="6" class="px-6 py-16 text-center text-gray-400">Aucun emprunt trouvé</td>
-        </tr>
-        <tr *ngFor="let loan of filteredLoans" class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-          <td class="px-6 py-4 font-medium text-gray-900">{{ loan.book.title }}</td>
-          <td class="px-6 py-4 text-gray-500">{{ loan.user.name }}</td>
-          <td class="px-6 py-4 text-gray-500">{{ loan.loanDate }}</td>
-          <td class="px-6 py-4 text-gray-500">{{ loan.returnDate || '—' }}</td>
-          <td class="px-6 py-4">
-            <span class="text-xs font-semibold px-2.5 py-1 rounded-full"
-              [ngClass]="!loan.returnDate ? 'bg-orange-50 text-orange-600' : 'bg-green-50 text-green-600'">
-              {{ loan.returnDate ? 'Retourné' : 'En cours' }}
-            </span>
-          </td>
-          <td class="px-6 py-4 text-right">
-            <button *ngIf="!loan.returnDate" (click)="returnBook(loan.book.id)"
-              class="text-violet-600 hover:bg-violet-50 text-xs font-semibold px-3 py-1.5 rounded-lg border border-violet-200 transition-colors">
-              Retourner
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200 text-sm">
+        <thead class="bg-gray-50">
+          <tr class="border-b border-gray-200">
+            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-400 uppercase tracking-wider">Livre</th>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-400 uppercase tracking-wider">Utilisateur</th>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-400 uppercase tracking-wider">Date emprunt</th>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-400 uppercase tracking-wider">Date retour</th>
+            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-400 uppercase tracking-wider">Statut</th>
+            <th class="px-6 py-4 text-right text-sm font-semibold text-gray-400 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="filteredLoans.length === 0">
+            <td colspan="6" class="px-6 py-16 text-center text-gray-400">Aucun emprunt trouvé</td>
+          </tr>
+          <tr *ngFor="let loan of filteredLoans" class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4 font-medium text-gray-900">{{ loan.book.title }}</td>
+            <td class="px-6 py-4 text-gray-500">{{ loan.user.name }}</td>
+            <td class="px-6 py-4 text-gray-500">{{ loan.loanDate }}</td>
+            <td class="px-6 py-4 text-gray-500">{{ loan.returnDate || ''}}</td>
+            <td class="px-6 py-4">
+              <span class="text-xs font-semibold px-2.5 py-1 rounded-full"
+                [ngClass]="!loan.returnDate ? 'bg-orange-50 text-orange-600' : 'bg-green-50 text-green-600'">
+                {{ loan.returnDate ? 'Retourné' : 'En cours' }}
+              </span>
+            </td>
+            <td class="px-6 py-4 text-right">
+              <button *ngIf="!loan.returnDate" (click)="returnBook(loan.book.id)"
+                class="text-violet-600 hover:bg-violet-50 text-xs font-semibold px-3 py-1.5 rounded-lg border border-violet-200 transition-colors">
+                Retourner
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-
 </div>
 
 <!-- Modal Emprunt -->
