@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environement';
+
 export interface Category {
   id: number;
   name: string;
@@ -38,25 +39,21 @@ export class BookService {
   }
 
   create(book: BookDTO): Observable<Book> {
-    
-    const payload = {
+    return this.http.post<Book>(this.apiUrl, {
       title: book.title,
       author: book.author,
       categoryId: book.categoryId,
       available: book.isAvailable
-    };
-    return this.http.post<Book>(this.apiUrl, payload);
+    });
   }
 
   update(id: number, book: BookDTO, category: Category): Observable<Book> {
-   
-    const payload = {
+    return this.http.put<Book>(`${this.apiUrl}/${id}`, {
       title: book.title,
       author: book.author,
       available: book.isAvailable,
       category: category
-    };
-    return this.http.put<Book>(`${this.apiUrl}/${id}`, payload);
+    });
   }
 
   delete(id: number): Observable<string> {
