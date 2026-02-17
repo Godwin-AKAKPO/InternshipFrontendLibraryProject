@@ -105,4 +105,36 @@ export class UserListComponent implements OnInit {
     this.successMsg = '';
     setTimeout(() => this.errorMsg = '', 4000);
   }
+
+  currentPage: number = 1;
+  pageSize: number = 10;
+
+  get paginatedUsers(){
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.users.slice(start, start + this.pageSize)
+  }
+
+  get totalPages() {
+    return Math.ceil(this.users.length / this.pageSize) || 1;
+  }
+
+  getStartIndex() {
+    return (this.currentPage -1) * this.pageSize;
+  }
+
+  getEndIndex() {
+    return Math.min(this.getStartIndex() + this.pageSize, this.users.length)
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(){
+    if (this.currentPage < this.totalPages){
+      this.currentPage++;
+    }
+  }
 }

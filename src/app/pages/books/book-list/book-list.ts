@@ -124,4 +124,40 @@ export class BookListComponent implements OnInit {
     this.successMsg = '';
     setTimeout(() => this.errorMsg = '', 4000);
   }
+
+  // Variables de pagination
+currentPage: number = 1;
+pageSize: number = 10;
+
+// Getter pour obtenir les livres de la page courante
+get paginatedBooks() {
+  const start = (this.currentPage - 1) * this.pageSize;
+  return this.books.slice(start, start + this.pageSize);
+}
+
+// Getters pour les infos d'affichage
+get totalPages() {
+  return Math.ceil(this.books.length / this.pageSize) || 1;
+}
+
+getStartIndex() {
+  return (this.currentPage - 1) * this.pageSize;
+}
+
+getEndIndex() {
+  return Math.min(this.getStartIndex() + this.pageSize, this.books.length);
+}
+
+// Fonctions de navigation
+prevPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+  }
+}
+
+nextPage() {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+  }
+}
 }
