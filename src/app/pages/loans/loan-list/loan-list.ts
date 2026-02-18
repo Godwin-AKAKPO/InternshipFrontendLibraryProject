@@ -111,5 +111,37 @@ export class LoanListComponent implements OnInit {
     this.successMsg = '';
     setTimeout(() => this.errorMsg = '', 4000);
   }
+
+  currentPage : number = 1;
+  pageSize : number = 10;
+
+  get PaginateLoans() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredLoans.slice(start, start + this.pageSize);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.loans.length / this.pageSize) || 1;
+  }
+
+  getStartIndex(){
+    return (this.currentPage - 1) * this.pageSize;
+  }
+
+  getEndIndex() {
+    return Math.min((this.getStartIndex() + this.pageSize, this.loans.length));
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages ){
+      this.currentPage++;
+    }
+  }
 }
 
