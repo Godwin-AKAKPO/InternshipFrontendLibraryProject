@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookService, Book, BookDTO } from '../../../core/services/book.service';
 import { CategoryService, Category } from '../../../core/services/category.service';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-book-list',
   standalone: true,
@@ -25,7 +25,11 @@ export class BookListComponent implements OnInit {
   editBook: BookDTO = { title: '', author: '', categoryId: 0, isAvailable: true };
   editBookId = 0;
 
-  constructor(private bookService: BookService, private categoryService: CategoryService) {}
+  constructor(
+    private bookService: BookService, 
+    private categoryService: CategoryService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadBooks();
@@ -34,7 +38,10 @@ export class BookListComponent implements OnInit {
 
   loadBooks() {
     this.bookService.getAll().subscribe({
-      next: data => this.books = data,
+      next: data => {
+        this.books = data,
+        this.cdr.detectChanges()
+      },
       error: () => this.showError('Erreur lors du chargement des livres.')
     });
   }

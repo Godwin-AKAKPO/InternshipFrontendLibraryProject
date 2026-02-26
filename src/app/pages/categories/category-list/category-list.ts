@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoryService, Category } from '../../../core/services/category.service';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-category-list',
   standalone: true,
@@ -20,7 +20,10 @@ export class CategoryListComponent implements OnInit {
 
   newCategory: Omit<Category, 'id'> = { name: '', description: '' };
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(
+    private categoryService: CategoryService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadCategories();
@@ -28,7 +31,10 @@ export class CategoryListComponent implements OnInit {
 
   loadCategories() {
     this.categoryService.getAll().subscribe({
-      next: data => this.categories = data,
+      next: data => {
+        this.categories = data,
+        this.cdr.detectChanges()
+      },
       error: () => this.showError('Erreur lors du chargement des catégories.')
     });
   }

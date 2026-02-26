@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService, User } from '../../../core/services/user.service';
 import { LoanService, Loan } from '../../../core/services/loan.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-user-list',
@@ -26,7 +27,11 @@ export class UserListComponent implements OnInit {
   selectedUserLoans: Loan[] = [];
   loadingLoans = false;
 
-  constructor(private userService: UserService, private loanService: LoanService) {}
+  constructor(
+    private userService: UserService, 
+    private loanService: LoanService,
+    private cdr: ChangeDetectorRef    
+  ) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -34,7 +39,10 @@ export class UserListComponent implements OnInit {
 
   loadUsers() {
     this.userService.getAll().subscribe({
-      next: data => this.users = data,
+      next: data => {
+        this.users = data,
+        this.cdr.detectChanges()
+      },
       error: () => this.showError('Erreur lors du chargement des utilisateurs.')
     });
   }

@@ -1,0 +1,10 @@
+.modal-wide {
+  max-width: 680px;
+}
+
+.loading-text {
+  text-align: center;
+  padding: 32px;
+  color: #9ca3af;
+  font-size: 14px;
+}

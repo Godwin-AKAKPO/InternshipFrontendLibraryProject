@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LoanService, Loan } from '../../../core/services/loan.service';
 import { BookService, Book } from '../../../core/services/book.service';
 import { UserService, User } from '../../../core/services/user.service';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-loan-list',
   standalone: true,
@@ -35,21 +35,23 @@ export class LoanListComponent implements OnInit {
     return this.loans;
   }
 
-  constructor(
-    private loanService: LoanService,
-    private bookService: BookService,
-    private userService: UserService
-  ) {}
+ constructor(
+  private loanService: LoanService,
+  private bookService: BookService,
+  private userService: UserService,
+  private cdr: ChangeDetectorRef 
+) {}
 
   ngOnInit() {
     this.loadLoans();
     this.loadAvailableBooks();
     this.userService.getAll().subscribe(u => this.users = u);
+    
   }
 
   loadLoans() {
     this.loanService.getAll().subscribe({
-      next: data => this.loans = data,
+      next: data => { this.loans = data, this.cdr.detectChanges() },
       error: () => this.showError('Erreur lors du chargement des emprunts.')
     });
   }
@@ -110,3 +112,4 @@ export class LoanListComponent implements OnInit {
     setTimeout(() => this.errorMsg = '', 4000);
   }
 }
+

@@ -2,39 +2,30 @@
 
   <div class="flex items-center justify-between mb-7">
     <div>
-      <h1 class="text-xl font-bold text-gray-900">Catégories</h1>
+      <h1 class="text-2xl font-bold text-gray-900">Catégories</h1>
       <p class="text-sm text-gray-500 mt-0.5">{{ categories.length }} catégorie(s) au total</p>
     </div>
     <button (click)="openCreateModal()"
       class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors">
-      + Ajouter une catégorie
+       Ajouter une catégorie
     </button>
   </div>
 
-  <div *ngIf="successMsg" class="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-lg mb-5">
-    {{ successMsg }}
-  </div>
-  <div *ngIf="errorMsg" class="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg mb-5">
-    {{ errorMsg }}
-  </div>
+  <div *ngIf="successMsg" class="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-lg mb-5">{{ successMsg }}</div>
+  <div *ngIf="errorMsg" class="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg mb-5">{{ errorMsg }}</div>
 
-  <div *ngIf="categories.length === 0"
-    class="bg-white border border-gray-200 rounded-xl px-4 py-12 text-center text-gray-400 text-sm">
+  <div *ngIf="categories.length === 0" class="bg-white border border-gray-200 rounded-xl px-4 py-16 text-center text-gray-400 text-sm shadow-sm">
     Aucune catégorie enregistrée
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div *ngFor="let cat of categories"
-      class="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+    <div *ngFor="let cat of categories" class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
       <div class="flex items-center gap-3 mb-3">
-        <div class="w-9 h-9 bg-green-50 text-green-700 rounded-lg flex items-center justify-center font-bold text-base">
-          {{ cat.name.charAt(0).toUpperCase() }}
-        </div>
         <h3 class="font-semibold text-gray-900">{{ cat.name }}</h3>
       </div>
       <p class="text-sm text-gray-500 leading-relaxed mb-4">{{ cat.description || 'Pas de description' }}</p>
       <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-        <span class="text-xs text-gray-400 font-medium">Livres</span>
+        <span class="text-xs text-gray-400 font-medium">Nombre de livres</span>
         <span class="bg-green-50 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">{{ cat.bookCount || 0 }}</span>
       </div>
     </div>
@@ -43,30 +34,25 @@
 </div>
 
 <!-- Modal Création -->
-<div *ngIf="showCreateModal" class="fixed inset-0 z-50 flex items-center justify-center p-6">
-  <div class="bg-white border border-gray-200 rounded-2xl p-8 w-full max-w-md shadow-xl">
-    <h2 class="text-lg font-bold text-gray-900 mb-6">Ajouter une catégorie</h2>
+<div *ngIf="showCreateModal" class="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/30 backdrop-blur-sm">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+    <h2 class="text-xl font-bold text-gray-900 mb-1">Ajouter une catégorie</h2>
+    <p class="text-sm text-gray-400 mb-6">Créez une nouvelle catégorie de livres</p>
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1.5">
-        <label class="text-sm font-semibold text-gray-700">Nom</label>
-        <input type="text" [(ngModel)]="newCategory.name" placeholder="Nom de la catégorie"
-          class="px-3 py-2.5 border border-gray-300 rounded-lg text-sm outline-none focus:border-green-600 focus:ring-2 focus:ring-green-100 transition-all" />
+        <label class="text-sm font-semibold text-gray-700">Nom <span class="text-red-500">*</span></label>
+        <input type="text" [(ngModel)]="newCategory.name" placeholder="Ex: Roman, Science-fiction..."
+          class="px-3 py-2.5 border border-gray-300 rounded-lg text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all" />
       </div>
       <div class="flex flex-col gap-1.5">
         <label class="text-sm font-semibold text-gray-700">Description</label>
-        <textarea [(ngModel)]="newCategory.description" placeholder="Description (optionnelle)" rows="3"
-          class="px-3 py-2.5 border border-gray-300 rounded-lg text-sm outline-none focus:border-green-600 focus:ring-2 focus:ring-green-100 transition-all resize-none"></textarea>
+        <textarea [(ngModel)]="newCategory.description" placeholder="Description optionnelle..." rows="3"
+          class="px-3 py-2.5 border border-gray-300 rounded-lg text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all resize-none"></textarea>
       </div>
     </div>
-    <div class="flex justify-end gap-3 mt-7">
-      <button (click)="closeCreateModal()"
-        class="px-4 py-2 border border-gray-200 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">
-        Annuler
-      </button>
-      <button (click)="createCategory()"
-        class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors">
-        Enregistrer
-      </button>
+    <div class="flex justify-end gap-3 mt-8">
+      <button (click)="closeCreateModal()" class="px-4 py-2.5 border border-gray-200 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">Annuler</button>
+      <button (click)="createCategory()" class="px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors">Enregistrer</button>
     </div>
   </div>
 </div>
