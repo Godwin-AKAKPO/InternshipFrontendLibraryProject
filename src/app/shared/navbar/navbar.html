@@ -1,0 +1,53 @@
+<nav class="fixed top-0 left-0 right-0 z-50 h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8">
+
+  <div class="flex items-center gap-3">
+    <div class="w-8 h-8 bg-green-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">B</div>
+    <span class="font-bold text-gray-900 text-lg">Bibliothèque</span>
+  </div>
+
+  <div class="flex items-center gap-1">
+    <a routerLink="/books" routerLinkActive="bg-green-50 text-green-700 font-semibold"
+       class="px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 transition-colors">
+      Livres
+    </a>
+    <a routerLink="/categories" routerLinkActive="bg-green-50 text-green-700 font-semibold"
+       class="px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 transition-colors">
+      Catégories
+    </a>
+    <a routerLink="/users" routerLinkActive="bg-green-50 text-green-700 font-semibold"
+       class="px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 transition-colors">
+      Utilisateurs
+    </a>
+    <a routerLink="/loans" routerLinkActive="bg-green-50 text-green-700 font-semibold"
+       class="px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 transition-colors">
+      Emprunts
+    </a>
+  </div>
+
+  <div class="relative">
+    <button (click)="toggleDropdown()"
+      class="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+      <div class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
+        {{ authService.getUsername().charAt(0).toUpperCase() }}
+      </div>
+      <span class="font-medium">{{ authService.getUsername() }}</span>
+      <svg class="w-4 h-4 text-gray-400 transition-transform" [class.rotate-180]="dropdownOpen"
+        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+      </svg>
+    </button>
+
+    <div *ngIf="dropdownOpen"
+      class="absolute right-0 top-12 bg-white border border-gray-200 rounded-xl shadow-lg w-44 p-1 z-50">
+      <button (click)="logout()"
+        class="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm text-red-600 hover:bg-red-50 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+          <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+        </svg>
+        Se déconnecter
+      </button>
+    </div>
+  </div>
+
+</nav>
