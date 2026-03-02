@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../../environments/environement';
 
 export interface Category {
   id: number;
@@ -11,7 +11,8 @@ export interface Category {
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
-  private apiUrl = 'http://localhost:8080/categories';
+  //Mettre 
+  private apiUrl = `${environment.apiUrl}/categories`;
 
   constructor(private http: HttpClient) {}
 
@@ -19,18 +20,8 @@ export class CategoryService {
     return this.http.get<Category[]>(this.apiUrl)
   }
 
-  // update(category: Category, id: number): Observable<Category>{
-
-  //   const payload = 
-  //   {
-  //     name : category.name,
-  //     description : category.description,
-  //   };
-    
-  //   return this.http.put(`${this.apiUrl}/${id}`, payload)
-  // }
 
   create(category: Omit<Category, 'id'>): Observable<Category> {
     return this.http.post<Category>(this.apiUrl, category);
   }
-}
+} 

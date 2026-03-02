@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Book } from './book.service';
 import { User } from './user.service';
-
+import { environment } from '../../../environments/environement';
 export interface Loan {
   id: number;
   loanDate: string;
@@ -14,7 +14,7 @@ export interface Loan {
 
 @Injectable({ providedIn: 'root' })
 export class LoanService {
-  private apiUrl = 'http://localhost:8080/loans';
+  private apiUrl = `${environment.apiUrl}/loans`
 
   constructor(private http: HttpClient) {}
 

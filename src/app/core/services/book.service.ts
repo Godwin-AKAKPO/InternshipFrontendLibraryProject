@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../../environments/environement';
 export interface Category {
   id: number;
   name: string;
@@ -25,7 +25,7 @@ export interface BookDTO {
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
-  private apiUrl = 'http://localhost:8080/books';
+  private apiUrl = `${environment.apiUrl}/books`;
 
   constructor(private http: HttpClient) {}
 
@@ -38,7 +38,7 @@ export class BookService {
   }
 
   create(book: BookDTO): Observable<Book> {
-    // Spring Boot attend "available" pas "isAvailable"
+    
     const payload = {
       title: book.title,
       author: book.author,
@@ -49,7 +49,7 @@ export class BookService {
   }
 
   update(id: number, book: BookDTO, category: Category): Observable<Book> {
-    // Spring Boot attend un Book complet avec la category entière
+   
     const payload = {
       title: book.title,
       author: book.author,
