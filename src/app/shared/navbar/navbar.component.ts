@@ -10,7 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       <div class="max-w-7xl mx-auto ">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-2">
-            <span class="font-bold text-2xl text-green-500">Bibliothèque</span>
+            <span class="font-bold text-2xl text-green-600">Bibliothèque</span>
           </div>    
           <div class="flex items-center gap-1">
             <a routerLink="/books" routerLinkActive=" text-green-600 font-semibold"

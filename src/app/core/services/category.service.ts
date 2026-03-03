@@ -11,8 +11,7 @@ export interface Category {
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
-  //Mettre 
-  private apiUrl = `${environment.apiUrl}/categories`;
+  private apiUrl = `${environment.apiUrl}/categories` 
 
   constructor(private http: HttpClient) {}
 
