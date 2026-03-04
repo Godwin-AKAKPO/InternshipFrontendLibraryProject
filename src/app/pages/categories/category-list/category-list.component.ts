@@ -33,7 +33,12 @@ import { Category, CategoryService } from '../../../core/services/category.servi
         <div *ngFor="let cat of categories" class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
           <div class="flex items-center  mb-2"><h1 class="font-semibold text-gray-800">{{ cat.name }}</h1></div>
           <p class="text-sm text-gray-500">{{ cat.description || 'Pas de description' }}</p>
-          <p class="text-lg text-gray-400 mt-2 border-t border-gray-100">TAF : Mettre le nbr de livres</p>
+          <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+            <span class="text-sm font-medium text-gray-500">Livres :</span>
+            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">
+              {{ cat.bookCount || 0 }}
+            </span>
+          </div>
         </div>
        </div>
     </div>
