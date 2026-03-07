@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CategoryService, Category } from '../../../core/services/category.service';
-
+import { Category, CategoryService } from '../../../core/services/category.service';
 @Component({
   selector: 'app-category-list',
   standalone: true,

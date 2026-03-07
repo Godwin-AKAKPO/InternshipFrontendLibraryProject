@@ -96,7 +96,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
             </thead>
             <tbody>
               <tr *ngFor="let loan of selectedUserLoans" class="border-b border-gray-100 hover:bg-gray-50">
-                <td class="py-3 px-2 font-medium text-gray-800">{{ loan.book?.title }}</td>
+                <td class="py-3 px-2 font-medium text-gray-800">{{ loan.book.title }}</td>
                 <td class="py-3 px-2 text-gray-600">{{ loan.loanDate }}</td>
                 <td class="py-3 px-2 text-gray-600">{{ loan.returnDate || ' ' }}</td>
                 <td class="py-3 px-8 text-right">

@@ -58,8 +58,8 @@ import { UserService, User } from '../../../core/services/user.service';
           <tbody>
             <tr *ngFor="let loan of filteredLoans" class="border-b border-gray-100 hover:bg-gray-50">
               <td class="px-4 py-3 text-gray-400">{{ loan.id }}</td>
-              <td class="px-4 py-3 font-medium text-gray-800">{{ loan.book?.title }}</td>
-              <td class="px-4 py-3 text-gray-600">{{ loan.user?.name }}</td>
+              <td class="px-4 py-3 font-medium text-gray-800">{{ loan.book.title }}</td>
+              <td class="px-4 py-3 text-gray-600">{{ loan.user.name }}</td>
               <td class="px-4 py-3 text-gray-600">{{ loan.loanDate }}</td>
               <td class="px-4 py-3 text-gray-600">{{ loan.returnDate || ' ' }}</td>
               <td class="px-4 py-3"><span [class]="!loan.returnDate ? 'bg-orange-50 text-orange-700 px-2 py-0.5 rounded-full text-xs' : 'bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-xs'">{{ loan.returnDate ? 'Retourné' : 'En cours' }}</span></td>

@@ -83,7 +83,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
               <td class="px-4 py-3 text-gray-400">{{ book.id }}</td>
               <td class="px-4 py-3 font-medium text-gray-800">{{ book.title }}</td>
               <td class="px-4 py-3 text-gray-600">{{ book.author }}</td>
-              <td class="px-4 py-3"><span class="text-blue-600 px-2 py-0.5 rounded-full text-sm">{{ book.category?.name || '—' }}</span></td>
+              <td class="px-4 py-3"><span class="text-blue-600 px-2 py-0.5 rounded-full text-sm">{{ book.category.name || '—' }}</span></td>
               <td class="px-4 py-3"><span [class]="book.available ? ' text-green-700 px-2 py-0.5 rounded-full text-sm' : ' text-red-700 px-2 py-0.5 rounded-full text-xm'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
               <td class="px-7 py-3 text-right">
                 <button (click)="openEditForm(book)" class="text-blue-500 font-medium px-4 py-2 text-sm"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -96,21 +96,6 @@ import { CategoryService, Category } from '../../../core/services/category.servi
     </div>
   `
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export class BookListComponent implements OnInit {
   books: Book[] = [];

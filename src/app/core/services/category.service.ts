@@ -7,10 +7,7 @@ export interface Category {
   id: number;
   name: string;
   description: string;
-}
-
-//INJjectable : Permet de definir une classe que l'on 
-//pourra injecter comme une dependance plus tard 
+}              
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
@@ -18,9 +15,20 @@ export class CategoryService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.apiUrl);
+  getAll(): Observable<Category[]>{
+    return this.http.get<Category[]>(this.apiUrl)
   }
+
+  // update(category: Category, id: number): Observable<Category>{
+
+  //   const payload = 
+  //   {
+  //     name : category.name,
+  //     description : category.description,
+  //   };
+    
+  //   return this.http.put(`${this.apiUrl}/${id}`, payload)
+  // }
 
   create(category: Omit<Category, 'id'>): Observable<Category> {
     return this.http.post<Category>(this.apiUrl, category);
