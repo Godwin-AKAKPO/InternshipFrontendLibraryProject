@@ -28,8 +28,13 @@
             "styles": [
               "src/styles.css"
             ],
+            "server": "src/main.ts",
+            "outputMode": "server",
             "security": {
               "allowedHosts": []
+            },
+            "ssr": {
+              "entry": "src/server.ts"
             }
           },
           "configurations": {
