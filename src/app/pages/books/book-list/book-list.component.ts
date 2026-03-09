@@ -18,6 +18,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
         <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">Ajouter</button>
       </div>
 
+      <!-- Formulaire Ajout -->
       <div *ngIf="showForm" class="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Nouveau livre</h2>
         <div class="grid grid-cols-2 gap-4">
@@ -34,6 +35,31 @@ import { CategoryService, Category } from '../../../core/services/category.servi
         <div class="flex gap-3 mt-4">
           <button (click)="createBook()" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm">Enregistrer</button>
           <button (click)="toggleForm()" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm">Annuler</button>
+        </div>
+      </div>
+
+      <!-- Formulaire Modification -->
+      <div *ngIf="showEditForm" class="bg-white border border-blue-200 rounded-xl p-6 mb-6 shadow-sm">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Modifier le livre</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="block text-sm font-medium text-gray-600 mb-1">Titre</label>
+            <input [(ngModel)]="editBook.title" type="text" placeholder="Titre" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" /></div>
+          <div><label class="block text-sm font-medium text-gray-600 mb-1">Auteur</label>
+            <input [(ngModel)]="editBook.author" type="text" placeholder="Auteur" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" /></div>
+          <div><label class="block text-sm font-medium text-gray-600 mb-1">Catégorie</label>
+            <select [(ngModel)]="editBook.categoryId" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+              <option [value]="0">-- Choisir --</option>
+              <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+            </select></div>
+          <div><label class="block text-sm font-medium text-gray-600 mb-1">Disponibilité</label>
+            <select [(ngModel)]="editBook.isAvailable" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+              <option [ngValue]="true">Disponible</option>
+              <option [ngValue]="false">Emprunté</option>
+            </select></div>
+        </div>
+        <div class="flex gap-3 mt-4">
+          <button (click)="updateBook()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm">Enregistrer</button>
+          <button (click)="cancelEdit()" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm">Annuler</button>
         </div>
       </div>
 
@@ -57,9 +83,13 @@ import { CategoryService, Category } from '../../../core/services/category.servi
               <td class="px-4 py-3 text-gray-400">{{ book.id }}</td>
               <td class="px-4 py-3 font-medium text-gray-800">{{ book.title }}</td>
               <td class="px-4 py-3 text-gray-600">{{ book.author }}</td>
-              <td class="px-4 py-3"><span class="bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full text-xs">{{ book.category?.name || '—' }}</span></td>
-              <td class="px-4 py-3"><span [class]="book.available ? 'bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-xs' : 'bg-red-50 text-red-700 px-2 py-0.5 rounded-full text-xs'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
-              <td class="px-4 py-3"><button (click)="deleteBook(book.id)" class="text-white hover:text-white bg-red-500 rounded-lg font-medium px-4 py-2 text-xs">Supprimer</button> | <button (click)="" class="text-white hover:text-white bg-blue-500 rounded-lg font-medium px-4 py-2 text-xs">Modifier</button></td>
+              <td class="px-4 py-3"><span class="text-blue-600 px-2 py-0.5 rounded-full text-xs">{{ book.category?.name || '—' }}</span></td>
+              <td class="px-4 py-3"><span [class]="book.available ? ' text-green-700 px-2 py-0.5 rounded-full text-xs' : ' text-red-700 px-2 py-0.5 rounded-full text-xs'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
+              <td class="px-4 py-3">
+                <button (click)="deleteBook(book.id)" class="text-white hover:text-white bg-red-500 rounded-lg font-medium px-4 py-2 text-xs">Supprimer</button>
+                |
+                <button (click)="openEditForm(book)" class="text-white hover:text-white bg-blue-500 rounded-lg font-medium px-4 py-2 text-xs">Modifier</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -71,8 +101,11 @@ export class BookListComponent implements OnInit {
   books: Book[] = [];
   categories: Category[] = [];
   showForm = false;
+  showEditForm = false;
   errorMsg = '';
   newBook: BookDTO = { title: '', author: '', categoryId: 0, isAvailable: true };
+  editBook: BookDTO = { title: '', author: '', categoryId: 0, isAvailable: true };
+  editBookId: number = 0;
 
   constructor(
     private bookService: BookService,
@@ -98,16 +131,46 @@ export class BookListComponent implements OnInit {
     });
   }
 
-  toggleForm() { this.showForm = !this.showForm; this.newBook = { title: '', author: '', categoryId: 0, isAvailable: true }; }
+  toggleForm() {
+    this.showForm = !this.showForm;
+    this.showEditForm = false;
+    this.newBook = { title: '', author: '', categoryId: 0, isAvailable: true };
+  }
+
+  openEditForm(book: Book) {
+    this.editBookId = book.id;
+    this.editBook = {
+      title: book.title,
+      author: book.author,
+      categoryId: book.category?.id ?? 0,
+      isAvailable: book.available
+    };
+    this.showEditForm = true;
+    this.showForm = false;
+  }
+
+  cancelEdit() {
+    this.showEditForm = false;
+    this.editBookId = 0;
+    this.editBook = { title: '', author: '', categoryId: 0, isAvailable: true };
+  }
 
   createBook() {
     if (!this.newBook.title || !this.newBook.author || !this.newBook.categoryId) return;
-    this.bookService.create(this.newBook).subscribe({ next: () => { this.loadBooks(); this.toggleForm(); }, error: () => this.errorMsg = 'Erreur création' });
+    this.bookService.create(this.newBook).subscribe({
+      next: () => { this.loadBooks(); this.toggleForm(); },
+      error: () => this.errorMsg = 'Erreur création'
+    });
   }
 
-  //Implémentation de la fonction de mise à jour d'un livre 
-  
-  //Implémentation de la fonction de suppression d'un livre après confirmation de suppression 
+  updateBook() {
+    if (!this.editBook.title || !this.editBook.author || !this.editBook.categoryId) return;
+    this.bookService.update(this.editBookId, this.editBook).subscribe({
+      next: () => { this.loadBooks(); this.cancelEdit(); },
+      error: () => this.errorMsg = 'Erreur modification'
+    });
+  }
+
   deleteBook(id: number) {
     if (!confirm('Supprimer ?')) return;
     this.bookService.delete(id).subscribe(() => this.loadBooks());
