@@ -15,7 +15,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
           <h1 class="text-2xl font-bold text-gray-800"> Livres</h1>
           <p class="text-sm text-gray-500 mt-1">{{ books.length }} livre(s)</p>
         </div>
-        <button (click)="toggleForm()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium">+ Ajouter</button>
+        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">Ajouter</button>
       </div>
 
       <div *ngIf="showForm" class="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
@@ -32,7 +32,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
             </select></div>
         </div>
         <div class="flex gap-3 mt-4">
-          <button (click)="createBook()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm">Enregistrer</button>
+          <button (click)="createBook()" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm">Enregistrer</button>
           <button (click)="toggleForm()" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm">Annuler</button>
         </div>
       </div>
@@ -46,8 +46,8 @@ import { CategoryService, Category } from '../../../core/services/category.servi
             <th class="px-4 py-3 font-semibold text-gray-600">Titre</th>
             <th class="px-4 py-3 font-semibold text-gray-600">Auteur</th>
             <th class="px-4 py-3 font-semibold text-gray-600">Catégorie</th>
-            <th class="px-4 py-3 font-semibold text-gray-600">Statut</th>
-            <th class="px-4 py-3 font-semibold text-gray-600">Actions</th>
+            <th class="px-8 py-3 font-semibold text-gray-600">Statut</th>
+            <th class="px-20 py-3 font-semibold text-gray-600">Actions</th>
           </tr></thead>
           <tbody>
             <tr *ngIf="books.length === 0 && !errorMsg">
@@ -59,7 +59,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
               <td class="px-4 py-3 text-gray-600">{{ book.author }}</td>
               <td class="px-4 py-3"><span class="bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full text-xs">{{ book.category?.name || '—' }}</span></td>
               <td class="px-4 py-3"><span [class]="book.available ? 'bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-xs' : 'bg-red-50 text-red-700 px-2 py-0.5 rounded-full text-xs'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
-              <td class="px-4 py-3"><button (click)="deleteBook(book.id)" class="text-red-500 hover:text-red-700 text-xs">Supprimer</button></td>
+              <td class="px-4 py-3"><button (click)="deleteBook(book.id)" class="text-white hover:text-white bg-red-500 rounded-lg font-medium px-4 py-2 text-xs">Supprimer</button> | <button (click)="" class="text-white hover:text-white bg-blue-500 rounded-lg font-medium px-4 py-2 text-xs">Modifier</button></td>
             </tr>
           </tbody>
         </table>
@@ -105,6 +105,9 @@ export class BookListComponent implements OnInit {
     this.bookService.create(this.newBook).subscribe({ next: () => { this.loadBooks(); this.toggleForm(); }, error: () => this.errorMsg = 'Erreur création' });
   }
 
+  //Implémentation de la fonction de mise à jour d'un livre 
+  
+  //Implémentation de la fonction de suppression d'un livre après confirmation de suppression 
   deleteBook(id: number) {
     if (!confirm('Supprimer ?')) return;
     this.bookService.delete(id).subscribe(() => this.loadBooks());

@@ -14,7 +14,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
           <h1 class="text-2xl font-bold text-gray-800"> Catégories</h1>
           <p class="text-sm text-gray-500 mt-1">{{ categories.length }} catégorie(s)</p>
         </div>
-        <button (click)="toggleForm()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium">+ Ajouter</button>
+        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">Ajouter</button>
       </div>
       <div *ngIf="showForm" class="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Nouvelle catégorie</h2>
