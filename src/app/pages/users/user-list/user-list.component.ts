@@ -13,10 +13,10 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
       <!-- Header -->
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-2xl font-bold text-gray-800"> Utilisateurs</h1>
+          <h1 class="text-3xl font-bold text-gray-800"> Utilisateurs</h1>
           <p class="text-sm text-gray-500 mt-1">{{ users.length }} utilisateur(s)</p>
         </div>
-        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">Ajouter un utilisateur</button>
+        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-medium">Ajouter un utilisateur</button>
       </div>
 
       <!-- Formulaire ajout -->
@@ -37,8 +37,8 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
       <div *ngIf="errorMsg" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ errorMsg }}</div>
 
       <!-- Tableau utilisateurs -->
-      <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-        <table class="w-full text-sm">
+      <div class="bg-white  border border-gray-200 shadow-sm overflow-hidden">
+        <table class="w-full text-xl">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200 text-left">
               <th class="px-4 py-3 font-semibold text-gray-600">ID</th>
@@ -55,7 +55,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
               <td class="px-4 py-3 text-gray-600">{{ user.email }}</td>
               <td class="px-4 py-3">
                 <button (click)="voirEmprunts(user)"
-                  class="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors">
+                  class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-xl font-medium transition-colors">
                   {{ selectedUser?.id === user.id ? 'Masquer' : 'Voir emprunts' }}
                 </button>
               </td>

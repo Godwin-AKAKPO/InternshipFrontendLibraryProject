@@ -12,10 +12,10 @@ import { CategoryService, Category } from '../../../core/services/category.servi
     <div>
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-2xl font-bold text-gray-800"> Livres</h1>
+          <h1 class="text-3xl font-bold text-gray-800"> Livres</h1>
           <p class="text-sm text-gray-500 mt-1">{{ books.length }} livre(s)</p>
         </div>
-        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium">Ajouter</button>
+        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-xl font-medium">Ajouter</button>
       </div>
 
       <!-- Formulaire Ajout -->
@@ -65,8 +65,8 @@ import { CategoryService, Category } from '../../../core/services/category.servi
 
       <div *ngIf="errorMsg" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ errorMsg }}</div>
 
-      <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-        <table class="w-full text-sm">
+      <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+        <table class="w-full text-xl">
           <thead><tr class="bg-gray-50 border-b border-gray-200 text-left">
             <th class="px-4 py-3 font-semibold text-gray-600">ID</th>
             <th class="px-4 py-3 font-semibold text-gray-600">Titre</th>
@@ -83,12 +83,12 @@ import { CategoryService, Category } from '../../../core/services/category.servi
               <td class="px-4 py-3 text-gray-400">{{ book.id }}</td>
               <td class="px-4 py-3 font-medium text-gray-800">{{ book.title }}</td>
               <td class="px-4 py-3 text-gray-600">{{ book.author }}</td>
-              <td class="px-4 py-3"><span class="text-blue-600 px-2 py-0.5 rounded-full text-xs">{{ book.category?.name || '—' }}</span></td>
-              <td class="px-4 py-3"><span [class]="book.available ? ' text-green-700 px-2 py-0.5 rounded-full text-xs' : ' text-red-700 px-2 py-0.5 rounded-full text-xs'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
+              <td class="px-4 py-3"><span class="text-blue-600 px-2 py-0.5 rounded-full text-xl">{{ book.category?.name || '—' }}</span></td>
+              <td class="px-4 py-3"><span [class]="book.available ? ' text-green-700 px-2 py-0.5 rounded-full text-xl' : ' text-red-700 px-2 py-0.5 rounded-full text-xl'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
               <td class="px-4 py-3">
-                <button (click)="deleteBook(book.id)" class="text-white hover:text-white bg-red-500 rounded-lg font-medium px-4 py-2 text-xs">Supprimer</button>
+                <button (click)="deleteBook(book.id)" class="text-white hover:text-white bg-red-500 rounded-lg font-medium px-4 py-2 text-xl">Supprimer</button>
                 |
-                <button (click)="openEditForm(book)" class="text-white hover:text-white bg-blue-500 rounded-lg font-medium px-4 py-2 text-xs">Modifier</button>
+                <button (click)="openEditForm(book)" class="text-white hover:text-white bg-blue-500 rounded-lg font-medium px-4 py-2 text-xl">Modifier</button>
               </td>
             </tr>
           </tbody>
