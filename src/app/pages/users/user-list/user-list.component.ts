@@ -13,10 +13,10 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
       <!-- Header -->
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-3xl font-bold text-gray-800"> Utilisateurs</h1>
+          <h1 class="text-2xl font-bold text-gray-800"> Utilisateurs</h1>
           <p class="text-sm text-gray-500 mt-1">{{ users.length }} utilisateur(s)</p>
         </div>
-        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-medium">Ajouter un utilisateur</button>
+        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-sm text-lg font-medium">Ajouter un utilisateur</button>
       </div>
 
       <!-- Formulaire ajout -->
@@ -38,7 +38,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
 
       <!-- Tableau utilisateurs -->
       <div class="bg-white  border border-gray-200 shadow-sm overflow-hidden">
-        <table class="w-full text-xl">
+        <table class="w-full text-sm">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-200 text-left">
               <th class="px-4 py-3 font-semibold text-gray-600">ID</th>
@@ -55,7 +55,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
               <td class="px-4 py-3 text-gray-600">{{ user.email }}</td>
               <td class="px-4 py-3">
                 <button (click)="voirEmprunts(user)"
-                  class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-xl font-medium transition-colors">
+                  class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-sm font-medium transition-colors">
                   {{ selectedUser?.id === user.id ? 'Masquer' : 'Voir emprunts' }}
                 </button>
               </td>
@@ -78,7 +78,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
           </div>
           <button (click)="fermerModal()"
             class="text-gray-400 hover:text-gray-600 bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors">
-            ✕ Fermer
+            Fermer
           </button>
         </div>
 
@@ -98,7 +98,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
               <tr *ngFor="let loan of selectedUserLoans" class="border-b border-gray-100 hover:bg-gray-50">
                 <td class="py-3 px-2 font-medium text-gray-800">{{ loan.book?.title }}</td>
                 <td class="py-3 px-2 text-gray-600">{{ loan.loanDate }}</td>
-                <td class="py-3 px-2 text-gray-600">{{ loan.returnDate || '—' }}</td>
+                <td class="py-3 px-2 text-gray-600">{{ loan.returnDate || ' ' }}</td>
                 <td class="py-3 px-2">
                   <span [class]="!loan.returnDate
                     ? 'bg-orange-50 text-orange-700 px-2 py-0.5 rounded-full text-xs font-medium'

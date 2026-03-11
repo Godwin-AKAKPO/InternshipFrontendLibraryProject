@@ -11,10 +11,10 @@ import { CategoryService, Category } from '../../../core/services/category.servi
     <div>
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-3xl font-bold text-gray-800"> Catégories</h1>
+          <h1 class="text-2xl font-bold text-gray-800"> Catégories</h1>
           <p class="text-sm text-gray-500 mt-1">{{ categories.length }} catégorie(s)</p>
         </div>
-        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-xl font-medium">Ajouter</button>
+        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-sm text-lg font-medium">Ajouter une catégorie</button>
       </div>
       <div *ngIf="showForm" class="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Nouvelle catégorie</h2>
@@ -33,7 +33,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div *ngFor="let cat of categories" class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
           <div class="flex items-center  mb-2"><h1 class="font-semibold text-gray-800">{{ cat.name }}</h1></div>
-          <p class="text-lg text-gray-500">{{ cat.description || 'Pas de description' }}</p>
+          <p class="text-sm text-gray-500">{{ cat.description || 'Pas de description' }}</p>
           <p class="text-lg text-gray-400 mt-2 border-t border-gray-100">{{ cat.id }}</p>
         </div>
        </div>

@@ -9,6 +9,8 @@ export interface Category {
   description: string;
 }
 
+//INJjectable : Permet de definir une classe que l'on 
+//pourra injecter comme une dependance plus tard 
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
