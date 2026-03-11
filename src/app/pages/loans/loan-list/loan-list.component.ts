@@ -16,7 +16,7 @@ import { UserService, User } from '../../../core/services/user.service';
           <h1 class="text-2xl font-bold text-gray-800">Emprunts</h1>
           <p class="text-sm text-gray-500 mt-1">{{ loans.length }} emprunt(s)</p>
         </div>
-        <button (click)="toggleBorrowForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-lg font-medium">Nouvel emprunt</button>
+        <button (click)="toggleBorrowForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-sm text-lg font-medium">Nouvel emprunt</button>
       </div>
       <div *ngIf="showBorrowForm" class="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Enregistrer un emprunt</h2>

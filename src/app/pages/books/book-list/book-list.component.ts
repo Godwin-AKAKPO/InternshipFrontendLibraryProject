@@ -58,7 +58,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
             </select></div>
         </div>
         <div class="flex gap-3 mt-4">
-          <button (click)="updateBook()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm">Enregistrer</button>
+          <button (click)="updateBook()" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm">Enregistrer</button>
           <button (click)="cancelEdit()" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm">Annuler</button>
         </div>
       </div>
