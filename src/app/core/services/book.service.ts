@@ -38,11 +38,25 @@ export class BookService {
   }
 
   create(book: BookDTO): Observable<Book> {
-    return this.http.post<Book>(this.apiUrl, book);
+    // Spring Boot attend "available" pas "isAvailable"
+    const payload = {
+      title: book.title,
+      author: book.author,
+      categoryId: book.categoryId,
+      available: book.isAvailable
+    };
+    return this.http.post<Book>(this.apiUrl, payload);
   }
 
-  update(id: number, book: Partial<Book>): Observable<Book> {
-    return this.http.put<Book>(`${this.apiUrl}/${id}`, book);
+  update(id: number, book: BookDTO, category: Category): Observable<Book> {
+    // Spring Boot attend un Book complet avec la category entière
+    const payload = {
+      title: book.title,
+      author: book.author,
+      available: book.isAvailable,
+      category: category
+    };
+    return this.http.put<Book>(`${this.apiUrl}/${id}`, payload);
   }
 
   delete(id: number): Observable<string> {

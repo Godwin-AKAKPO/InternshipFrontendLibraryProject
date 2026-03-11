@@ -13,10 +13,10 @@ import { UserService, User } from '../../../core/services/user.service';
     <div>
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-3xl font-bold text-gray-800">Emprunts</h1>
+          <h1 class="text-2xl font-bold text-gray-800">Emprunts</h1>
           <p class="text-sm text-gray-500 mt-1">{{ loans.length }} emprunt(s)</p>
         </div>
-        <button (click)="toggleBorrowForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-xl font-medium">Nouvel emprunt</button>
+        <button (click)="toggleBorrowForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-lg font-medium">Nouvel emprunt</button>
       </div>
       <div *ngIf="showBorrowForm" class="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
         <h2 class="text-lg font-semibold text-gray-700 mb-4">Enregistrer un emprunt</h2>
@@ -45,7 +45,7 @@ import { UserService, User } from '../../../core/services/user.service';
         <button (click)="filter='returned'" [class]="filter==='returned' ? 'bg-green-600 text-white px-3 py-1.5 rounded-lg text-sm' : 'bg-white text-gray-600 border border-gray-200 px-3 py-1.5 rounded-lg text-sm'">Retournés ({{ returnedLoans.length }})</button>
       </div>
       <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-        <table class="w-full text-xl">
+        <table class="w-full text-sm">
           <thead><tr class="bg-gray-50 border-b border-gray-200 text-left">
             <th class="px-4 py-3 font-semibold text-gray-600">ID</th>
             <th class="px-4 py-3 font-semibold text-gray-600">Livre</th>

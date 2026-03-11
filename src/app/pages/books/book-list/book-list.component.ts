@@ -9,13 +9,13 @@ import { CategoryService, Category } from '../../../core/services/category.servi
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div>
+    <div class="mx-3">
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-3xl font-bold text-gray-800"> Livres</h1>
+          <h1 class="text-2xl font-bold text-gray-800"> Livres</h1>
           <p class="text-sm text-gray-500 mt-1">{{ books.length }} livre(s)</p>
         </div>
-        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-xl font-medium">Ajouter</button>
+        <button (click)="toggleForm()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-sm text-lg font-medium">Ajouter un livre</button>
       </div>
 
       <!-- Formulaire Ajout -->
@@ -66,14 +66,14 @@ import { CategoryService, Category } from '../../../core/services/category.servi
       <div *ngIf="errorMsg" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">{{ errorMsg }}</div>
 
       <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
-        <table class="w-full text-xl">
+        <table class="w-full text-sm">
           <thead><tr class="bg-gray-50 border-b border-gray-200 text-left">
             <th class="px-4 py-3 font-semibold text-gray-600">ID</th>
             <th class="px-4 py-3 font-semibold text-gray-600">Titre</th>
             <th class="px-4 py-3 font-semibold text-gray-600">Auteur</th>
             <th class="px-4 py-3 font-semibold text-gray-600">Catégorie</th>
             <th class="px-8 py-3 font-semibold text-gray-600">Statut</th>
-            <th class="px-20 py-3 font-semibold text-gray-600">Actions</th>
+            <th class="px-18 py-3 font-semibold text-gray-600">Actions</th>
           </tr></thead>
           <tbody>
             <tr *ngIf="books.length === 0 && !errorMsg">
@@ -83,12 +83,11 @@ import { CategoryService, Category } from '../../../core/services/category.servi
               <td class="px-4 py-3 text-gray-400">{{ book.id }}</td>
               <td class="px-4 py-3 font-medium text-gray-800">{{ book.title }}</td>
               <td class="px-4 py-3 text-gray-600">{{ book.author }}</td>
-              <td class="px-4 py-3"><span class="text-blue-600 px-2 py-0.5 rounded-full text-xl">{{ book.category?.name || '—' }}</span></td>
-              <td class="px-4 py-3"><span [class]="book.available ? ' text-green-700 px-2 py-0.5 rounded-full text-xl' : ' text-red-700 px-2 py-0.5 rounded-full text-xl'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
-              <td class="px-4 py-3">
-                <button (click)="deleteBook(book.id)" class="text-white hover:text-white bg-red-500 rounded-lg font-medium px-4 py-2 text-xl">Supprimer</button>
-                |
-                <button (click)="openEditForm(book)" class="text-white hover:text-white bg-blue-500 rounded-lg font-medium px-4 py-2 text-xl">Modifier</button>
+              <td class="px-4 py-3"><span class="text-blue-600 px-2 py-0.5 rounded-full text-sm">{{ book.category?.name || '—' }}</span></td>
+              <td class="px-4 py-3"><span [class]="book.available ? ' text-green-700 px-2 py-0.5 rounded-full text-sm' : ' text-red-700 px-2 py-0.5 rounded-full text-xm'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
+              <td class="px-12 py-3">
+                <button (click)="openEditForm(book)" class="text-blue-500 font-medium px-4 py-2 text-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button (click)="deleteBook(book.id)" class="text-red-500 rounded-sm font-medium px-4 py-2 text-sm"><i class="fa fa-trash"></i></button>
               </td>
             </tr>
           </tbody>
@@ -120,14 +119,8 @@ export class BookListComponent implements OnInit {
 
   loadBooks() {
     this.bookService.getAll().subscribe({
-      next: data => {
-        this.books = data;
-        this.cdr.detectChanges();
-      },
-      error: err => {
-        this.errorMsg = 'Erreur de chargement';
-        this.cdr.detectChanges();
-      }
+      next: data => { this.books = data; this.cdr.detectChanges(); },
+      error: () => { this.errorMsg = 'Erreur de chargement'; this.cdr.detectChanges(); }
     });
   }
 
@@ -165,7 +158,10 @@ export class BookListComponent implements OnInit {
 
   updateBook() {
     if (!this.editBook.title || !this.editBook.author || !this.editBook.categoryId) return;
-    this.bookService.update(this.editBookId, this.editBook).subscribe({
+    // Récupère l'objet category complet depuis la liste
+    const category = this.categories.find(c => c.id === Number(this.editBook.categoryId));
+    if (!category) { this.errorMsg = 'Catégorie introuvable'; return; }
+    this.bookService.update(this.editBookId, this.editBook, category).subscribe({
       next: () => { this.loadBooks(); this.cancelEdit(); },
       error: () => this.errorMsg = 'Erreur modification'
     });
