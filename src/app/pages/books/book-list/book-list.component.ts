@@ -73,7 +73,7 @@ import { CategoryService, Category } from '../../../core/services/category.servi
             <th class="px-4 py-3 font-semibold text-gray-600">Auteur</th>
             <th class="px-4 py-3 font-semibold text-gray-600">Catégorie</th>
             <th class="px-8 py-3 font-semibold text-gray-600">Statut</th>
-            <th class="px-18 py-3 font-semibold text-gray-600">Actions</th>
+            <th class="px-11 py-3 text-right font-semibold text-gray-600">Actions</th>
           </tr></thead>
           <tbody>
             <tr *ngIf="books.length === 0 && !errorMsg">
@@ -85,9 +85,9 @@ import { CategoryService, Category } from '../../../core/services/category.servi
               <td class="px-4 py-3 text-gray-600">{{ book.author }}</td>
               <td class="px-4 py-3"><span class="text-blue-600 px-2 py-0.5 rounded-full text-sm">{{ book.category?.name || '—' }}</span></td>
               <td class="px-4 py-3"><span [class]="book.available ? ' text-green-700 px-2 py-0.5 rounded-full text-sm' : ' text-red-700 px-2 py-0.5 rounded-full text-xm'">{{ book.available ? 'Disponible' : 'Emprunté' }}</span></td>
-              <td class="px-12 py-3">
+              <td class="px-7 py-3 text-right">
                 <button (click)="openEditForm(book)" class="text-blue-500 font-medium px-4 py-2 text-sm"><i class="fa-solid fa-pen-to-square"></i></button>
-                <button (click)="deleteBook(book.id)" class="text-red-500 rounded-sm font-medium px-4 py-2 text-sm"><i class="fa fa-trash"></i></button>
+                <button (click)="deleteBook(book.id)" class="text-red-500 rounded-sm font-medium px-2 py-2 text-sm"><i class="fa fa-trash"></i></button>
               </td>
             </tr>
           </tbody>
@@ -96,6 +96,22 @@ import { CategoryService, Category } from '../../../core/services/category.servi
     </div>
   `
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export class BookListComponent implements OnInit {
   books: Book[] = [];
   categories: Category[] = [];

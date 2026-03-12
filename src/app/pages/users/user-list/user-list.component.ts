@@ -44,7 +44,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
               <th class="px-4 py-3 font-semibold text-gray-600">ID</th>
               <th class="px-4 py-3 font-semibold text-gray-600">Nom</th>
               <th class="px-4 py-3 font-semibold text-gray-600">Email</th>
-              <th class="px-4 py-3 font-semibold text-gray-600">Actions</th>
+              <th class="px-15 py-3 font-semibold text-gray-600 text-right">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +53,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
               <td class="px-4 py-3 text-gray-400">{{ user.id }}</td>
               <td class="px-4 py-3 font-medium text-gray-800">{{ user.name }}</td>
               <td class="px-4 py-3 text-gray-600">{{ user.email }}</td>
-              <td class="px-4 py-3">
+              <td class="px-8 py-3 text-right">
                 <button (click)="voirEmprunts(user)"
                   class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-sm font-medium transition-colors">
                   {{ selectedUser?.id === user.id ? 'Masquer' : 'Voir emprunts' }}
@@ -91,7 +91,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
                 <th class="pb-2 px-2 font-semibold text-gray-600">Livre</th>
                 <th class="pb-2 px-2 font-semibold text-gray-600">Date emprunt</th>
                 <th class="pb-2 px-2 font-semibold text-gray-600">Date retour</th>
-                <th class="pb-2 px-2 font-semibold text-gray-600">Statut</th>
+                <th class="pb-2 px-10 font-semibold text-right text-gray-600">Statut</th>
               </tr>
             </thead>
             <tbody>
@@ -99,7 +99,7 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
                 <td class="py-3 px-2 font-medium text-gray-800">{{ loan.book?.title }}</td>
                 <td class="py-3 px-2 text-gray-600">{{ loan.loanDate }}</td>
                 <td class="py-3 px-2 text-gray-600">{{ loan.returnDate || ' ' }}</td>
-                <td class="py-3 px-2">
+                <td class="py-3 px-8 text-right">
                   <span [class]="!loan.returnDate
                     ? 'bg-orange-50 text-orange-700 px-2 py-0.5 rounded-full text-xs font-medium'
                     : 'bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-xs font-medium'">
