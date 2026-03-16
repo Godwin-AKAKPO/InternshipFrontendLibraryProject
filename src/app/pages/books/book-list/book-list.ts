@@ -8,8 +8,8 @@ import { CategoryService, Category } from '../../../core/services/category.servi
   selector: 'app-book-list',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.css'
+  templateUrl: './book-list.html',
+  styleUrl: './book-list.css'
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];

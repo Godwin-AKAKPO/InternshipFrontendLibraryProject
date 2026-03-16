@@ -7,8 +7,8 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'app-navbar',
   standalone: true,
   imports: [RouterLink, RouterLinkActive, CommonModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  templateUrl: './navbar.html',
+  styleUrl: './navbar.css'
 })
 export class NavbarComponent {
   dropdownOpen = false;

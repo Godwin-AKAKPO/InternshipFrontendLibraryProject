@@ -7,8 +7,8 @@ import { CategoryService, Category } from '../../../core/services/category.servi
   selector: 'app-category-list',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './category-list.component.html',
-  styleUrl: './category-list.component.css'
+  templateUrl: './category-list.html',
+  styleUrl: './category-list.css'
 })
 export class CategoryListComponent implements OnInit {
   categories: Category[] = [];

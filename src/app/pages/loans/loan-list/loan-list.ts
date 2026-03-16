@@ -9,8 +9,8 @@ import { UserService, User } from '../../../core/services/user.service';
   selector: 'app-loan-list',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './loan-list.component.html',
-  styleUrl: './loan-list.component.css'
+  templateUrl: './loan-list.html',
+  styleUrl: './loan-list.css'
 })
 export class LoanListComponent implements OnInit {
   loans: Loan[] = [];

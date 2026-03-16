@@ -8,8 +8,8 @@ import { LoanService, Loan } from '../../../core/services/loan.service';
   selector: 'app-user-list',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css'
+  templateUrl: './user-list.html',
+  styleUrl: './user-list.css'
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
